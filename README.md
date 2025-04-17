@@ -1,1 +1,466 @@
-# image-generator
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   
+    <title>Static Skeleton Loader</title>
+    <style>
+        /* Styles */
+        body {
+            font-family: times new roman;
+            margin: 0;
+            padding: 0;
+            background: 
+    linear-gradient(45deg, rgba(255, 0, 150, 0.3) 0%, rgba(0, 204, 255, 0.3) 25%, rgba(0, 0, 0, 0.3) 50%, rgba(204, 255, 0, 0.3) 75%, rgba(255, 0, 150, 0.3) 100%), 
+    linear-gradient(135deg, rgba(255, 204, 0, 0.4) 0%, rgba(0, 102, 255, 0.4) 33%, rgba(255, 0, 255, 0.4) 66%, rgba(67, 198, 172, 0.4) 100%), 
+    linear-gradient(90deg, rgba(252, 92, 125, 0.5) 0%, rgba(106, 130, 251, 0.5) 33%, rgba(253, 200, 48, 0.5) 66%, rgba(233, 150, 122, 0.5) 100%), 
+    linear-gradient(60deg, rgba(137, 207, 240, 0.4) 0%, rgba(250, 190, 88, 0.4) 25%, rgba(72, 12, 168, 0.4) 50%, rgba(255, 95, 109, 0.4) 75%, rgba(184, 184, 184, 0.4) 100%), 
+    linear-gradient(150deg, rgba(226, 112, 99, 0.3) 0%, rgba(241, 148, 138, 0.3) 25%, rgba(236, 112, 99, 0.3) 50%, rgba(239, 83, 80, 0.3) 75%, rgba(252, 174, 97, 0.3) 100%), 
+    linear-gradient(120deg, rgba(92, 92, 92, 0.4) 0%, rgba(252, 70, 107, 0.4) 33%, rgba(249, 168, 37, 0.4) 66%, rgba(233, 150, 122, 0.4) 100%), 
+    linear-gradient(0deg, rgba(240, 255, 240, 0.3) 0%, rgba(30, 30, 30, 0.3) 100%), 
+    linear-gradient(180deg, rgba(255, 127, 80, 0.3) 0%, rgba(135, 206, 235, 0.3) 100%), 
+    linear-gradient(270deg, rgba(0, 0, 128, 0.3) 0%, rgba(173, 216, 230, 0.3) 100%), 
+    linear-gradient(360deg, rgba(128, 0, 0, 0.3) 0%, rgba(255, 182, 193, 0.3) 100%), 
+    linear-gradient(45deg, rgba(240, 128, 128, 0.3) 0%, rgba(255, 165, 0, 0.3) 100%), 
+    linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(173, 255, 47, 0.3) 100%), 
+    linear-gradient(90deg, rgba(0, 255, 255, 0.3) 0%, rgba(0, 128, 128, 0.3) 100%), 
+    linear-gradient(60deg, rgba(255, 20, 147, 0.3) 0%, rgba(255, 105, 180, 0.3) 100%), 
+    linear-gradient(150deg, rgba(0, 0, 255, 0.3) 0%, rgba(65, 105, 225, 0.3) 100%), 
+    linear-gradient(120deg, rgba(138, 43, 226, 0.3) 0%, rgba(75, 0, 130, 0.3) 100%), 
+    linear-gradient(0deg, rgba(240, 230, 140, 0.3) 0%, rgba(255, 255, 0, 0.3) 100%), 
+    linear-gradient(180deg, rgba(34, 139, 34, 0.3) 0%, rgba(107, 142, 35, 0.3) 100%), 
+    linear-gradient(270deg, rgba(46, 139, 87, 0.3) 0%, rgba(144, 238, 144, 0.3) 100%), 
+    linear-gradient(360deg, rgba(85, 107, 47, 0.3) 0%, rgba(107, 142, 35, 0.3) 100%);
+background-blend-mode: multiply, overlay, lighten, darken, soft-light, screen, color-dodge, color-burn, hue, luminosity;
+           color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: center;
+            gap: 0px;
+            margin-bottom: 1.5rem;
+        }
+
+        input {
+            font-family: times new roman;
+            width: 80%;
+            padding: 0.4rem;
+            border: none;
+            border-radius: 50px 0px 0px 50px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        button {
+            font-family: times new roman;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #ff5e57;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        #generateBtn:hover {
+            background: #ff3d3a;
+        }
+
+        #imageContainer {
+            position: relative;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 10px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        #imageContainer img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .placeholder {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+       .skeleton-loader {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    background: linear-gradient(135deg, #E8E8E8 25%, #D3D3D3 50%, #E8E8E8 75%);
+    background-size: 200% 200%;
+    animation: shimmer 2.5s infinite ease-in-out;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0%;
+    }
+    50% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 200% 0%;
+    }
+}
+
+
+        .btn-container {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-container button {
+            background: #3498db;
+        }
+
+        .btn-container button:hover {
+            background: #2980b9;
+        }
+        
+        #generateBtn {
+            border-radius: 5px 50px 50px 5px;
+        }
+        .icon-btn {
+            background: #fff;
+            color: #000;
+            font-size: 1rem;
+            padding: 0.3rem;
+            border-radius: 0px 2px 2px 0px;
+            cursor: pointer;
+        }
+#generateBtn {
+    margin-left:2px
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Image Generator</h1>
+        <p>Enter a description to generate a unique AI image.</p>
+        <div class="input-group">
+            <input type="text" id="promptInput" value="A majestic mountain landscape at sunset" placeholder="Type your prompt here..." />
+            <button id="repeatBtn" class="icon-btn"><i class="fas fa-repeat"></i></button>
+            
+            <button id="generateBtn">Generate</button>
+        </div>
+        <div id="imageContainer">
+            <p class="placeholder">Your generated image will appear here.</p>
+        </div>
+        <div class="btn-container">
+            <button id="clearBtn" style="display: none;">Clear</button>
+            <button id="downloadBtn" style="display: none;">Download Image</button>
+        </div>
+    </div>
+
+    <script>
+    const randomPrompts = [
+    "A majestic mountain landscape at sunset",
+    "A futuristic city under a starry sky",
+    "A serene beach with turquoise waters",
+    "A magical forest with glowing plants",
+    "A vibrant festival with colorful decorations",
+    "A bustling market in an ancient city",
+    "A tranquil lake surrounded by tall trees",
+    "A spaceship flying through a nebula",
+    "A cozy cabin in the snowy mountains",
+    "A surreal desert with giant sand dunes",
+    "A mystical waterfall in a dense jungle",
+    "A grand castle on a hill overlooking a valley",
+    "A beautiful coral reef with colorful fish",
+    "A mysterious cave with glowing crystals",
+    "A majestic lion walking through the savannah",
+    "A futuristic robot exploring a deserted city",
+    "A serene Japanese garden with a koi pond",
+    "A dark stormy sky over a vast ocean",
+    "A glowing aurora borealis in the night sky",
+    "A peaceful countryside with rolling hills",
+    "A giant ancient tree with sprawling roots",
+    "A magical dragon flying above the clouds",
+    "A bustling street in a neon-lit city",
+    "A tranquil desert sunset with cacti",
+    "A whimsical carnival with bright lights",
+    "A hidden temple in a dense jungle",
+    "A mysterious alien planet with strange creatures",
+    "A serene mountain lake at dawn",
+    "A vibrant city skyline at night",
+    "A colorful hot air balloon soaring through the sky",
+    "A peaceful forest glade with a gentle stream",
+    "A futuristic space station orbiting a distant planet",
+    "A magical unicorn in a lush meadow",
+    "A dark enchanted forest with misty fog",
+    "A tranquil village by the sea",
+    "A massive waterfall plunging into a canyon",
+    "A medieval knight on horseback",
+    "A futuristic city with flying cars",
+    "A peaceful sunrise over a calm ocean",
+    "A colorful autumn forest with falling leaves",
+    "A mysterious fog rolling through an old town",
+    "A snowy winter wonderland with twinkling lights",
+    "A tropical island with palm trees and crystal clear water",
+    "A spaceship landing on an alien planet",
+    "A majestic eagle soaring above a mountain range",
+    "A surreal landscape with floating islands",
+    "A glowing jellyfish floating in deep ocean waters",
+    "A vibrant street art mural on a city wall",
+    "A magical wizard casting a spell in a dark castle",
+    "A futuristic underwater city",
+    "A peaceful village in the foothills of the mountains",
+    "A massive dragon perched on a rocky cliff",
+    "A serene sunflower field under a blue sky",
+    "A glowing firefly swarm in a dark forest",
+    "A giant treehouse in a dense forest",
+    "A futuristic metropolis at night",
+    "A quiet library with towering bookshelves",
+    "A neon-lit cyberpunk city street",
+    "A surreal reflection of mountains in a calm lake",
+    "A beautiful gothic cathedral at dusk",
+    "A deserted ghost town in the Wild West",
+    "A lush vineyard in the rolling hills of Tuscany",
+    "A peaceful river flowing through a canyon",
+    "A hidden garden in the middle of a busy city",
+    "A celestial nebula with vibrant colors",
+    "A foggy morning in an ancient forest",
+    "A bustling train station in a futuristic city",
+    "A giant tree with roots extending to the sky",
+    "A wild stallion running across the plains",
+    "A majestic whale swimming through the ocean depths",
+    "A vintage motorcycle parked in an alley",
+    "A colorful city at dawn with rising sun",
+    "A mysterious old book on a wooden table",
+    "A magical forest with floating lights",
+    "A shimmering diamond in the desert sand",
+    "A majestic eagle perched on a cliff",
+    "A cozy fire in a rustic mountain cabin",
+    "A vast icy tundra with snowstorms",
+    "A futuristic vehicle speeding on a highway",
+    "A dark sky filled with swirling clouds",
+    "A beautiful koi fish swimming in a pond",
+    "A giant mushroom forest in an enchanted world",
+    "A magical ship sailing through the stars",
+    "A tropical waterfall surrounded by lush greenery",
+    "A vibrant sunset over a peaceful village",
+    "A vintage train traveling through the countryside",
+    "A busy marketplace with exotic spices and fruits",
+    "A peaceful hilltop with a panoramic view",
+    "A giant butterfly perched on a flower",
+    "A futuristic city with towering skyscrapers",
+    "A giant clock tower in the heart of a city",
+    "A mystical mountain range hidden in clouds",
+    "A beach with bioluminescent waves",
+    "A beautiful castle surrounded by mist",
+    "A large balloon festival in the mountains",
+    "A magnificent sunrise over the desert",
+    "A secret underground bunker full of treasures",
+    "A peaceful chapel in the middle of the forest",
+    "A giant shipwreck washed ashore",
+    "A charming café on a Parisian street",
+    "A quiet lakeside cabin with a wooden dock",
+    "A futuristic amusement park",
+    "A historic battlefield with abandoned weapons",
+    "A serene morning in a rural village",
+    "A mystical owl perched in a tree",
+    "A glowing lantern in a dark forest",
+    "A tranquil snow-covered village at night",
+    "A futuristic bridge connecting two skyscrapers",
+    "A wild fox running through the forest",
+    "A neon-lit street in a rainy cyberpunk city",
+    "A towering lighthouse on a rocky cliff",
+    "A quiet, mysterious graveyard at night",
+    "A hidden treasure chest buried in the sand",
+    "A peaceful garden filled with blooming roses",
+    "A massive pyramid in the middle of the desert",
+    "A sparkling city by the sea",
+    "A futuristic train on elevated tracks",
+    "A floating island with waterfalls",
+    "A hidden waterfall in a tropical jungle",
+    "A desert landscape with giant stone statues",
+    "A busy harbor with cargo ships",
+    "A vibrant flower field in spring",
+    "A peaceful glade in the woods",
+    "A fiery volcanic eruption",
+    "A giant castle on a mountaintop",
+    "A futuristic robot in a lush garden",
+    "A haunted house on a misty hill",
+    "A mysterious creature lurking in the shadows",
+    "A peaceful sunset over a calm lake",
+    "A futuristic cybernetic warrior",
+    "A beautiful meadow full of wildflowers",
+    "A lush tropical rainforest with exotic birds",
+    "A quiet mountain village at dusk",
+    "A magical potion brewing in a cauldron",
+    "A pirate ship on the open seas",
+    "A majestic waterfall cascading down cliffs",
+    "A bustling medieval town square",
+    "A secret hidden cave with ancient treasures",
+    "A tranquil ice cave with glowing blue crystals",
+    "A glowing moon over a quiet desert",
+    "A peaceful farm with rolling hills",
+    "A magical snow-covered forest",
+    "A futuristic underwater research station",
+    "A glowing comet streaking across the night sky",
+    "A mystical sphinx guarding an ancient tomb",
+    "A calm sea with a single sailboat",
+    "A towering mountain with a winding path",
+    "A charming old bookstore in a quiet alley",
+    "A glowing city skyline at night",
+    "A futuristic high-tech laboratory",
+    "A bright neon sign in a dark alley",
+    "A tranquil forest glade with fireflies",
+    "A peaceful countryside road in autumn",
+    "A crystal-clear blue lake surrounded by trees",
+    "A hidden valley filled with exotic animals",
+    "A mystical phoenix rising from the ashes",
+    "A vibrant city street during a parade",
+    "A peaceful island with white sand beaches",
+    "A snowy mountain pass with high cliffs",
+    "A beautiful church surrounded by flowers",
+    "A bright futuristic holographic city",
+    "A calm ocean with a single lighthouse",
+    "A giant ancient stone bridge over a river",
+    "A glowing starry sky above a forest",
+    "A beautiful medieval castle at twilight",
+    "A peaceful bamboo forest",
+    "A surreal landscape with floating clouds",
+    "A mystical portal in a dark cave",
+    "A vintage radio on an old wooden desk",
+    "A serene countryside with grazing sheep",
+    "A moonlit night over a calm ocean",
+    "A futuristic flying car over a city",
+    "A mysterious ancient book on a stone pedestal",
+    "A beautiful glowing firefly field",
+    "A giant tree with magical creatures in its branches",
+    "A serene mountain stream flowing through a valley",
+    "A futuristic cityscape at sunset",
+    "A magical castle surrounded by a moat",
+    "A peaceful snowy landscape with a cabin",
+    "A surreal underwater world with colorful corals",
+    "A futuristic space battle between starships",
+    "A beautiful moonlit night over a deserted beach",
+    "A vast, endless field of golden wheat",
+    "A hidden garden with a stone bench",
+    "A towering ice sculpture in a frozen village",
+    "A futuristic flying city high above the clouds",
+    "A secret treasure hidden in an ancient temple",
+    "A tropical beach with vibrant coral reefs",
+    "A mysterious ancient pyramid in the jungle",
+    "A glowing city street in a futuristic world",
+    "A tranquil lakeside scene with mist rising",
+    "A glowing alien landscape under a purple sky",
+    "A wild forest with towering trees and thick fog",
+    "A beautiful sunset over a peaceful mountain range",
+    "A magical snowman in a winter wonderland",
+    "A bustling futuristic spaceport",
+    "A calm ocean with a few scattered islands",
+    "A majestic waterfall flowing into a deep river",
+    "A vintage car parked in front of an old diner",
+    "A glowing neon sign in a rainy alley",
+    "A futuristic city at dusk",
+    "A vibrant street festival in a big city",
+    "A peaceful park with a pond full of ducks",
+    "A magical castle on a floating island",
+    "A beautiful sunrise over a calm sea",
+    "A futuristic hologram in a high-tech laboratory",
+    "A quiet forest with a flowing stream",
+    "A bustling space station orbiting a distant planet",
+    "A mysterious stone circle on a hilltop"
+];
+
+
+        document.getElementById('repeatBtn').addEventListener('click', () => {
+            const randomPrompt = randomPrompts[Math.floor(Math.random() * randomPrompts.length)];
+            document.getElementById('promptInput').value = randomPrompt;
+        });
+        
+        document.getElementById('generateBtn').addEventListener('click', () => {
+            const promptInput = document.getElementById('promptInput').value.trim();
+            const imageContainer = document.getElementById('imageContainer');
+            const clearBtn = document.getElementById('clearBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+
+            if (promptInput === "") {
+                alert("Please enter a prompt to generate an image.");
+                return;
+            }
+
+            const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptInput)}/?nologo=1&width=1920&height=1920`;
+
+            clearBtn.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            imageContainer.innerHTML = '<div class="skeleton-loader"></div>';
+
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = promptInput;
+            img.onload = () => {
+                imageContainer.innerHTML = "";
+                imageContainer.appendChild(img);
+                downloadBtn.style.display = 'inline-block';
+                clearBtn.style.display = 'inline-block';
+            };
+            img.onerror = () => {
+                imageContainer.innerHTML = '<p class="placeholder">Failed to load image. Try again.</p>';
+                downloadBtn.style.display = 'none';
+                clearBtn.style.display = 'inline-block';
+            };
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            document.getElementById('promptInput').value = "";
+            document.getElementById('imageContainer').innerHTML = '<p class="placeholder">Your generated image will appear here.</p>';
+            document.getElementById('clearBtn').style.display = 'none';
+            document.getElementById('downloadBtn').style.display = 'none';
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const img = document.querySelector('#imageContainer img');
+            if (img) {
+                const link = document.createElement('a');
+                link.href = img.src;
+                link.download = 'generated-image.jpg';
+                link.click();
+            }
+        });
+    </script>
+</body>
+</html>
